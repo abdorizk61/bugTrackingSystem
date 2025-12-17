@@ -10,6 +10,8 @@ public class AppConfig {
     public static final String DATA_FOLDER = "data/";
     public static final String USERS_FILE = DATA_FOLDER + "users.txt";
     public static final String BUGS_FILE = DATA_FOLDER + "bugs.txt";
+    public static final String NOTIFICATIONS_FILE = DATA_FOLDER + "notifications.txt";
+
     
     // Application settings
     public static final String APP_NAME = "Bug Tracking System";
