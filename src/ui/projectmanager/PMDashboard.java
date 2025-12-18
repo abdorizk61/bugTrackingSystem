@@ -28,6 +28,44 @@ public class PMDashboard extends javax.swing.JFrame {
         
         loadDashboardStats();
         loadBugsTable(null, null); 
+        // ============================================================
+        // START: Notification System Integration (Added Menu Bar)
+        // ============================================================
+        // Create the Menu Bar
+        javax.swing.JMenuBar menuBar = new javax.swing.JMenuBar();
+        
+        // Create "Notifications" Menu
+        javax.swing.JMenu notificationMenu = new javax.swing.JMenu("🔔 Notifications");
+        
+        // Create "Open Inbox" Menu Item
+        javax.swing.JMenuItem inboxItem = new javax.swing.JMenuItem("Open Inbox");
+        
+        // Add Action Listener to open the Inbox Dialog
+        inboxItem.addActionListener(e -> {
+             // Try to get the currently logged-in user
+             // We use AdminDashboard's static method as a temporary session accessor
+             models.User currentUser = ui.admin.AdminDashboard.getLogedInUser();
+             
+             // Fallback: Create a dummy PM user for testing if no user is logged in
+             if(currentUser == null) {
+                 currentUser = new models.User();
+                 currentUser.setId(4); // Assuming ID 4 is a Project Manager
+                 currentUser.setUsername("PM_Test_User");
+             }
+             
+             // Open the Notification Dialog passing the current user
+             new ui.common.NotificationDialog(this, currentUser).setVisible(true);
+        });
+        
+        // Add the item to the menu, and the menu to the bar
+        notificationMenu.add(inboxItem);
+        menuBar.add(notificationMenu);
+        
+        // Set this menu bar to the JFrame
+        this.setJMenuBar(menuBar);
+        // ============================================================
+        // END: Notification System Integration
+        // ============================================================
     }
 
     
