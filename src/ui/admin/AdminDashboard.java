@@ -33,6 +33,42 @@ public class AdminDashboard extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        setLocationRelativeTo(null);
+        // ============================================================
+        // START: Notification System Integration (Added Menu Bar)
+        // ============================================================
+        // Create the Menu Bar
+        javax.swing.JMenuBar menuBar = new javax.swing.JMenuBar();
+        
+        // Create "Notifications" Menu
+        javax.swing.JMenu notificationMenu = new javax.swing.JMenu("🔔 Notifications");
+        
+        // Create "Open Inbox" Menu Item
+        javax.swing.JMenuItem inboxItem = new javax.swing.JMenuItem("Open Inbox");
+        
+        // Add Action Listener to open the Inbox Dialog
+        inboxItem.addActionListener(e -> {
+             // Get the currently logged-in user (Admin)
+             models.User currentUser = getLogedInUser();
+             
+             if(currentUser != null) {
+                 // Open the Notification Dialog passing the current user
+                 new ui.common.NotificationDialog(this, currentUser).setVisible(true);
+             } else {
+                 // Show warning if no user is logged in
+                 javax.swing.JOptionPane.showMessageDialog(this, "No user logged in!", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+             }
+        });
+        
+        // Add the item to the menu, and the menu to the bar
+        notificationMenu.add(inboxItem);
+        menuBar.add(notificationMenu);
+        
+        // Set this menu bar to the JFrame
+        this.setJMenuBar(menuBar);
+        // ============================================================
+        // END: Notification System Integration
+        // ============================================================
 
         headerPanel2 = new javax.swing.JPanel();
         lblTitle2 = new javax.swing.JLabel();
